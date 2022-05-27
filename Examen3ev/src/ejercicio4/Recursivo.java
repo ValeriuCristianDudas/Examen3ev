@@ -15,7 +15,7 @@ public class Recursivo {
 				}
 			}
 			System.out.println(j + " * " + i + " = " + j*i);
-			return tablaMultiplicar(i + 1, j);
+			return tablaMultiplicar(i + 2, j);
 	}
 	
 	/**

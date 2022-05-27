@@ -1,5 +1,7 @@
 package ejercicio1;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import java.util.Scanner;
 
 public class MySQLAccess {
 	
@@ -33,8 +36,11 @@ public class MySQLAccess {
 	final private String user = "root";
 	final private String passwd = "root";
 
-	
-	public void readDataBase() throws Exception {
+	/**
+	 * Pre: ---
+	 * Post: Este metodo lee la base de datos e inserta datos en ella
+	 */
+	public void readDataBase(int id, String letra, String palabra, int linea) throws Exception {
 		try {
 			/*
 			 * Cargamos el driver MySQL que hemos descargado anteriormente.
@@ -64,6 +70,7 @@ public class MySQLAccess {
 		    */
 		   resultSet = statement
 		       .executeQuery("select * from registro");
+		   System.out.println("QUERY ---> select * from user");
 		   /*
 		    * Invocamos al m�todo escribir, que muestra por pantalla
 		    * el resultado de la consulta anterior.
@@ -82,27 +89,14 @@ public class MySQLAccess {
 		    * la posici�n del parametro que estamos colocando y su valor. LAS POSICIONES
 		    * EMPIEZAN DESDE 1!.
 		    */
-		   //preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
-		   System.out.println("QUERY ---> insert into user(id, password, username)");
+		   preparedStatement.setInt(1, id);
+		   preparedStatement.setString(2, letra);
+		   preparedStatement.setString(3, palabra);
+		   preparedStatement.setInt(4, linea);
 		   preparedStatement.executeUpdate();
 		
 		   preparedStatement = connect
-				   .prepareStatement("SELECT * from user");
-		   System.out.println("QUERY ---> select * from user");
-		   resultSet = preparedStatement.executeQuery();
-		   writeResultSet(resultSet);
-		
-		   // Remove again the insert comment
-		   preparedStatement = connect
-				   .prepareStatement("delete from user where username= ?");
-		   preparedStatement.setString(1, "Juan Carlos");
-		   preparedStatement.executeUpdate();		
-		   System.out.println("QUERY ---> delete from user where");
-		   writeResultSet(resultSet);
-		   
-		   preparedStatement = connect
-				   .prepareStatement("SELECT * from user");
-		   System.out.println("QUERY ---> select * from user");
+				   .prepareStatement("SELECT * from registro");
 		   resultSet = preparedStatement.executeQuery();
 		   writeResultSet(resultSet);
 		} catch (Exception e) {
@@ -150,6 +144,37 @@ public class MySQLAccess {
 		}
 	}
 
+	/**
+	 * Pre: 
+	 * Post: Metodo que lee el archivo .txt
+	 */
+	public void lecture(String a) {
+		File f = new File("HablanosDelDon.txt");
+		try {
+			int lin = 0;
+			int id = 0;
+			Scanner l = new Scanner(f);
+			while(l.hasNextLine()) {
+				String li = l.nextLine();
+				li = li.replace(".", "").replace("?", "").replace("¿", "")
+						.replace(",", "");
+				String[] line = li.split(" ");
+				for(int i = 0; i < line.length; i ++) {
+					try {
+						readDataBase(id, a, line[i], lin);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					id++;
+				}
+				lin++;
+
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Pre: ---
 	 * Post: cerramos todas las conexiones abiertas, el resultSet
