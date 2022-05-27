@@ -1,6 +1,6 @@
 package ejercicio4;
 
-public class recursivo {
+public class Recursivo {
 	/**
 	 * Pre: ---
 	 * Post: Este es un metodo recursivo, que muestra por pantalla la tabla de multiplicar

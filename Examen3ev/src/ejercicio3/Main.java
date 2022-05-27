@@ -8,6 +8,7 @@ public class Main {
 		s.add(new Node(20));
 		s.add(new Node(12));
 		s.add(new Node(55));
+		s.add(new Node(10));
 		s.eliminarMayor();
 		s.show();
 	}
