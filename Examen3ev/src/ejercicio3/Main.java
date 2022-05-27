@@ -1,6 +1,11 @@
 package ejercicio3;
 
 public class Main {
+	/**
+	 * Pre:
+	 * Post: Metodo main, crea una lista simple enlazada y añade nodos,
+	 * luego llama a metodos de la clase SimpleLinkedList
+	 */
 	public static void main(String[] args) {
 		SimpleLinkedList s = new SimpleLinkedList();
 		s.add(new Node(1));

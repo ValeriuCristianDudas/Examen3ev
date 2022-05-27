@@ -4,10 +4,18 @@ public class Node {
 	private int content;
 	private Node next;
 	
+	/**
+	 * Pre: ---
+	 * Post: Metodo constructor para el objeto respectivo
+	 */
 	public Node (int content) {
 		this.content = content;
 	}
 	
+	/**
+	 * Pre: ---
+	 * Post: Metodo constructor para el objeto respectivo
+	 */
 	public Node (int content, Node next) {
 		this.content = content;
 		this.next = next;
@@ -29,6 +37,11 @@ public class Node {
 		this.next = next;
 	}
 	
+	/**
+	 * Pre: ---
+	 * Post: Metodo toString devuelve las variables en un formato para
+	 * ser mostrado por pantalla
+	 */
 	@Override
 	public String toString() {
 		return "Content = " + content + " Next = " + next;

@@ -4,6 +4,10 @@ public class Localidad {
 	private String denom;
 	private int total;
 	
+	/**
+	 * Pre: ---
+	 * Post: Metodo constructor para el objeto respectivo
+	 */
 	public Localidad(String denom, int total) {
 		super();
 		this.denom = denom;
@@ -22,8 +26,14 @@ public class Localidad {
 		this.total = total;
 	}
 	
+	/**
+	 * Pre:
+	 * Post: Metodo toString devuelve las variables en un formato para
+	 * ser mostrado por pantalla
+	 */
 	@Override
 	public String toString() {
 		return denom + " cuenta con " + total + " divorcios";
 	}
+	
 }
